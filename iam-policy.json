@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "ReadReceipts",
+      "Effect": "Allow",
+      "Action": ["textract:AnalyzeExpense"],
+      "Resource": "*"
+    },
+    {
+      "Sid": "ReceiptPhotos",
+      "Effect": "Allow",
+      "Action": [
+        "s3:CreateBucket",
+        "s3:PutBucketPublicAccessBlock",
+        "s3:ListBucket",
+        "s3:PutObject",
+        "s3:GetObject"
+      ],
+      "Resource": ["arn:aws:s3:::cashback-receipts-*", "arn:aws:s3:::cashback-receipts-*/*"]
+    },
+    {
+      "Sid": "Submissions",
+      "Effect": "Allow",
+      "Action": [
+        "dynamodb:CreateTable",
+        "dynamodb:DescribeTable",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Scan",
+        "dynamodb:ConditionCheckItem"
+      ],
+      "Resource": "arn:aws:dynamodb:*:*:table/cashback-submissions"
+    }
+  ]
+}
